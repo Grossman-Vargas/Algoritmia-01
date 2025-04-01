@@ -1,66 +1,72 @@
 public class MergeSort {
 
-    public static void main(String[] args) {
-        int[] arr = {38, 27, 43, 3, 9, 82, 10}; // Arreglo de ejemplo
-        mergeSort(arr); // Llamada al algoritmo de Merge Sort
-        System.out.println("Arreglo ordenado: ");
-        for (int num : arr) {
-            System.out.print(num + " ");
-        }
-    }
+    public static void mergeSort(int[] arreglo) {
 
-    // Método que implementa el algoritmo de Merge Sort
-    public static void mergeSort(int[] arr) {
-        if (arr.length < 2) {
-            return; // Si el arreglo tiene menos de dos elementos, ya está ordenado
+        if (arreglo.length < 2) {
+
+            return;
+
         }
 
-        // Encuentra el punto medio
-        int middle = arr.length / 2;
+        int mitad_Arr = arreglo.length / 2;
 
-        // Divide el arreglo en dos mitades
-        int[] left = new int[middle];
-        int[] right = new int[arr.length - middle];
+        int[] prim_Arr = new int[mitad_Arr];
+        int[] seg_Arr = new int[arreglo.length - mitad_Arr];
 
-        System.arraycopy(arr, 0, left, 0, middle);
-        System.arraycopy(arr, middle, right, 0, arr.length - middle);
+        System.arraycopy(arreglo, 0, prim_Arr, 0, mitad_Arr);
+        System.arraycopy(arreglo, mitad_Arr, seg_Arr, 0, arreglo.length - mitad_Arr);
 
-        // Ordena cada mitad de forma recursiva
-        mergeSort(left);
-        mergeSort(right);
 
-        // Fusiona las dos mitades ordenadas
-        merge(arr, left, right);
+        mergeSort(prim_Arr);
+        mergeSort(seg_Arr);
+
+
+        merge(arreglo, prim_Arr, seg_Arr);
     }
 
-    // Método que fusiona dos subarreglos ordenados
-    public static void merge(int[] arr, int[] left, int[] right) {
-        int i = 0, j = 0, k = 0;
 
-        // Compara y fusiona los elementos de left y right
-        while (i < left.length && j < right.length) {
-            if (left[i] <= right[j]) {
-                arr[k] = left[i];
+    public static void merge(int[] arreglo, int[] prim_Arr, int[] seg_Arr) {
+
+        int i = 0;
+        int j = 0;
+        int k = 0;
+
+
+        while (i < prim_Arr.length && j < seg_Arr.length) {
+            if (prim_Arr[i] <= seg_Arr[j]) {
+
+                arreglo[k] = prim_Arr[i];
                 i++;
+
             } else {
-                arr[k] = right[j];
+
+                arreglo[k] = seg_Arr[j];
                 j++;
+
             }
+
             k++;
+
         }
 
-        // Si quedan elementos en left
-        while (i < left.length) {
-            arr[k] = left[i];
+
+        while (i < prim_Arr.length) {
+
+            arreglo[k] = prim_Arr[i];
             i++;
             k++;
+
         }
 
-        // Si quedan elementos en right
-        while (j < right.length) {
-            arr[k] = right[j];
+
+        while (j < seg_Arr.length) {
+
+            arreglo[k] = seg_Arr[j];
             j++;
             k++;
+
         }
+
     }
+
 }
