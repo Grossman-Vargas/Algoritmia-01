@@ -12,6 +12,15 @@ public class Main {
 
         }
 
+        MergeSortMejorao.mergeSort(arr);
+        System.out.println("\nArreglo ordenado: ");
+
+        for (int num : arr) {
+
+            System.out.print(num + " ");
+
+        }
+
     }
 
 }
